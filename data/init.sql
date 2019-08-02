@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS `laconia`;
+CREATE DATABASE IF NOT EXISTS `taniarascia_mvc_laconia`;
 
-USE `laconia`;
+USE `taniarascia_mvc_laconia`;
 
 DROP TABLE IF EXISTS `comments`;
 
