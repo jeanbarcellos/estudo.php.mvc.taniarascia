@@ -7,8 +7,13 @@
 function filter_post()
 {
     $post = filter_input_array(INPUT_POST);
-    $post = array_map('trim', $post);
-    $post = array_map('htmlspecialchars', $post);
+
+    if (!is_null($post)) {
+        $post = array_map('trim', $post);
+        $post = array_map('htmlspecialchars', $post);
+    } else {
+        $post = [];
+    }
 
     return $post;
 }
@@ -20,8 +25,13 @@ function filter_post()
 function filter_get()
 {
     $get = filter_input_array(INPUT_GET);
-    $get = array_map('trim', $get);
-    $get = array_map('htmlspecialchars', $get);
+
+    if (!is_null($get)) {
+        $get = array_map('trim', $get);
+        $get = array_map('htmlspecialchars', $get);
+    } else {
+        $get = [];
+    }
 
     return $get;
 }

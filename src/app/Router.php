@@ -2,13 +2,18 @@
 
 /**
  * Router Class
- * 
+ *
  * This code was originally created for The PHP Practitioner course on Laracasts.
- * I have modified it for my purposes, adding Session, List, and User classes into the 
+ * I have modified it for my purposes, adding Session, List, and User classes into the
  * controller, as well as routing usernames and dynamic URLs such as edit/:list_id.
- * 
+ *
+ * Este código foi originalmente criado para o curso Practitioner PHP em Laracasts.
+ * Modifiquei-o para meus propósitos, adicionando classes Session, List e User ao
+ * controlador, bem como roteamento de nomes de usuário e URLs dinâmicos, como edit /: list_id.
+ *
  * @link https://github.com/laracasts/The-PHP-Practitioner-Full-Source-Code/blob/master/core/Router.php
  */
+
 use Laconia\Session;
 use Laconia\ListClass;
 use Laconia\User;
@@ -21,7 +26,9 @@ class Router
      */
     public $routes = [
         'GET' => [],
-        'POST' => []
+        'POST' => [],
+        'PUT' => [],
+        'DELETE' => []
     ];
 
     /**
@@ -32,6 +39,7 @@ class Router
         $router = new static;
 
         require $file;
+
         return $router;
     }
 
@@ -50,9 +58,24 @@ class Router
     {
         $this->routes['POST'][$uri] = $controller;
     }
+    /**
+     * Register a PUT route.
+     */
+    public function put($uri, $controller)
+    {
+        $this->routes['PUT'][$uri] = $controller;
+    }
+    /**
+     * Register a DELETE route.
+     */
+    public function delete($uri, $controller)
+    {
+        $this->routes['DELETE'][$uri] = $controller;
+    }
 
     /**
      * Load the requested URI's associated controller method.
+     * Carregar o método do controlador associado do URI solicitado.
      */
     public function direct($uri, $requestType)
     {
@@ -66,7 +89,7 @@ class Router
                 $uri = 'edit';
             }
         }
-        // Gather all users from the database and compare against uri 
+        // Gather all users from the database and compare against uri
         elseif ($username) {
             $uri = 'user';
         }
@@ -86,6 +109,7 @@ class Router
 
     /**
      * Load and call the relevant controller action.
+     * Carregue e chame a ação do controlador relevante.
      */
     protected function callAction($controller, $action)
     {

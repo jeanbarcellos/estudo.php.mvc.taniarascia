@@ -2,7 +2,7 @@
 
 /**
  * Controller Class
- * 
+ *
  * Connects the database and session models to the front-end views
  */
 namespace Laconia;
